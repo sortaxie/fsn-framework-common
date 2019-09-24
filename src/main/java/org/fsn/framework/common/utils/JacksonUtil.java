@@ -83,4 +83,18 @@ public class JacksonUtil {
     }
 
 
+    /**
+     * 将bean转化为另一种bean实体
+     * 
+     * @param object
+     * @param entityClass
+     * @return
+     */
+    public static <T> T convertBean(Object object, Class<T> entityClass) {
+        if(null == object) {
+            return null;
+        }
+        return JacksonUtil.readValue(JacksonUtil.toJson(object), entityClass);
+    }
+
 }

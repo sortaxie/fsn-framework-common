@@ -28,7 +28,7 @@ public class MD5Util {
         return new String(str);
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         try {
            System.out.println(MD5Util.md5("123456"));
         } catch (NoSuchAlgorithmException e) {
@@ -36,5 +36,11 @@ public class MD5Util {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        byte[] inputBytes = "123456".getBytes("UTF-8");
+        MessageDigest mdInst = MessageDigest.getInstance("md5");
+        mdInst.update(inputBytes);
+
+        System.out.println(new String( mdInst.digest()));
     }
 }
