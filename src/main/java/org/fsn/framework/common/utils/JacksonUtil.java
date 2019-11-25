@@ -2,10 +2,12 @@ package org.fsn.framework.common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.IOException;
+import java.util.List;
 
 public class JacksonUtil {
     public static ObjectMapper objectMapper  = new ObjectMapper();
@@ -95,6 +97,23 @@ public class JacksonUtil {
             return null;
         }
         return JacksonUtil.readValue(JacksonUtil.toJson(object), entityClass);
+    }
+
+
+    public static <T> List<T> convertList(Object object, Class<?> collectionClass, Class<?>... elementClasses) {
+        if(null == object) {
+            return null;
+        }
+        try {
+            return objectMapper.readValue(JacksonUtil.toJson(object), getCollectionType(collectionClass,elementClasses) );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected static JavaType  getCollectionType( Class<?> collectionClass, Class<?>... elementClasses) {
+        return objectMapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
 
 }
