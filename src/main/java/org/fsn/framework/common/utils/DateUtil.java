@@ -104,8 +104,8 @@ public class DateUtil {
      */
     public static String getNextMonth(int month) {
         LocalDateTime today = LocalDateTime.now();
-        LocalDateTime yesterday = today.minusMonths(month);
-        String format = yesterday.format(DATE_TIME_FORMATTER);
+        LocalDateTime yesterday = today.plusMonths(month);
+        String format = yesterday.format(YM);
         return format;
     }
 
