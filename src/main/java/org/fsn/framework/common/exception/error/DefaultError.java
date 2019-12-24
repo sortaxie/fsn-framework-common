@@ -14,7 +14,8 @@ public enum DefaultError implements IError {
     SIGNT_OVERTIME_ERROR("0005","Signt Overtime Error"),
     INVALID_SIGN("0006", "Invalid Sign"),
     LOADBALANCE_ERROR("0007","Load Balance Error"),
-    ARGUMENT_ERROR("0008","Argument Error");
+    ARGUMENT_ERROR("0008","Argument Error"),
+    TOO_MANY_THREAD_ERROR("0009","Too Many Thread Error");
 
 
     String errorCode;
