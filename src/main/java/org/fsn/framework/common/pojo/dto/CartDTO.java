@@ -2,58 +2,67 @@ package org.fsn.framework.common.pojo.dto;
 
 public class CartDTO {
 
-    private long uid; //用户id
-    private long pid; //产品id
-    private long gid; //货品id
-    private long prmid; //规格id
-    private int an;  //活动编号
-    private long ct;// 创建时间
+    private Long uid; //用户id
+    private Long pid; //产品id
+    private Long gid; //货品id
+    private Long prmid; //规格id
+    private Integer an;  //活动编号
+    private Long ct;// 创建时间
+    private Integer count;//数量
 
-    public long getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(long uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
-    public long getPid() {
+    public Long getPid() {
         return pid;
     }
 
-    public void setPid(long pid) {
+    public void setPid(Long pid) {
         this.pid = pid;
     }
 
-    public long getGid() {
+    public Long getGid() {
         return gid;
     }
 
-    public void setGid(long gid) {
+    public void setGid(Long gid) {
         this.gid = gid;
     }
 
-    public long getPrmid() {
+    public Long getPrmid() {
         return prmid;
     }
 
-    public void setPrmid(long prmid) {
+    public void setPrmid(Long prmid) {
         this.prmid = prmid;
     }
 
-    public int getAn() {
+    public Integer getAn() {
         return an;
     }
 
-    public void setAn(int an) {
+    public void setAn(Integer an) {
         this.an = an;
     }
 
-    public long getCt() {
+    public Long getCt() {
         return ct;
     }
 
-    public void setCt(long ct) {
+    public void setCt(Long ct) {
         this.ct = ct;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }
