@@ -12,20 +12,41 @@ import java.util.concurrent.TimeUnit;
  */
 public final class ThreadPoolQueueManager {
 
-    private static ThreadPoolQueueManager sThreadPoolManager = new ThreadPoolQueueManager();
+    private volatile static ThreadPoolQueueManager sThreadPoolManager =null;
 
     // 线程池维护线程的最少数量
-    private static final int SIZE_CORE_POOL = 20;
+    private static final int SIZE_CORE_POOL = Runtime.getRuntime().availableProcessors() * 4;
 
     // 线程池维护线程的最大数量
-    private static final int SIZE_MAX_POOL = 40;
+    private static final int SIZE_MAX_POOL = Runtime.getRuntime().availableProcessors() * 8;
 
     private ThreadPoolRejectedHandler threadPoolRejectedHandler= new ThreadPoolRejectedHandler();
+
+
+    /**
+     * 线程池
+     * @param corePoolSize - 池中所保存的线程数，包括空闲线程。
+     * @param maximumPoolSize - 池中允许的最大线程数。
+     * @param keepAliveTime - 当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间。
+     * @param unit - keepAliveTime 参数的时间单位。
+     * @param workQueue - 执行前用于保持任务的队列。此队列仅由保持 execute 方法提交的 Runnable 任务。
+     * @param handler - 由于超出线程范围和队列容量而使执行被阻塞时所使用的处理程序。
+     */
+    // 实质就是newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待
+    private final ThreadPoolExecutor mThreadPool = new ThreadPoolExecutor(SIZE_CORE_POOL, SIZE_MAX_POOL, 0L,
+            TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(SIZE_CORE_POOL+SIZE_MAX_POOL),threadPoolRejectedHandler);
 
     /*
      * 线程池单例创建方法
      */
-    public static ThreadPoolQueueManager newInstance() {
+    public static ThreadPoolQueueManager getInstance() {
+        if (sThreadPoolManager == null) {
+            synchronized (ThreadPoolManager.class) {
+                if (sThreadPoolManager == null) {
+                    sThreadPoolManager = new ThreadPoolQueueManager();
+                }
+            }
+        }
         return sThreadPoolManager;
     }
 
@@ -48,18 +69,7 @@ public final class ThreadPoolQueueManager {
      * return new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>()); }
      ****************************************************************************************************************/
 
-    /**
-     * 线程池
-     * @param corePoolSize - 池中所保存的线程数，包括空闲线程。
-     * @param maximumPoolSize - 池中允许的最大线程数。
-     * @param keepAliveTime - 当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间。
-     * @param unit - keepAliveTime 参数的时间单位。
-     * @param workQueue - 执行前用于保持任务的队列。此队列仅由保持 execute 方法提交的 Runnable 任务。
-     * @param handler - 由于超出线程范围和队列容量而使执行被阻塞时所使用的处理程序。
-     */
-    // 实质就是newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待
-    private final ThreadPoolExecutor mThreadPool = new ThreadPoolExecutor(SIZE_CORE_POOL, SIZE_MAX_POOL, 0L,
-            TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(SIZE_MAX_POOL),threadPoolRejectedHandler);
+
 
     /*
      * 将构造方法访问修饰符设为私有，禁止任意实例化。
