@@ -8,7 +8,7 @@ public class CartDTO {
     @JsonIgnore
     public  static String  DEFALUTP ="shop";
     private String p;//项目名称
-    private Long uid; //用户id
+    private String uid; //用户id
     private Long pid; //产品id
     private Long gid; //货品id
     private Long prmid; //规格id
@@ -25,11 +25,11 @@ public class CartDTO {
         this.p = p;
     }
 
-    public Long getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
