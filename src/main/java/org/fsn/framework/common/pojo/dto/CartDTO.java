@@ -10,8 +10,8 @@ public class CartDTO {
     private String p;//项目名称
     private String uid; //用户id
     private Long pid; //产品id
-    private Long gid; //货品id
-    private Long prmid; //规格id
+    private Long skuid; //货品id
+    private Long specid; //规格id
     private Integer an;  //活动编号
     private Long ct;// 创建时间
     private Integer count;//数量
@@ -41,20 +41,20 @@ public class CartDTO {
         this.pid = pid;
     }
 
-    public Long getGid() {
-        return gid;
+    public Long getSkuid() {
+        return skuid;
     }
 
-    public void setGid(Long gid) {
-        this.gid = gid;
+    public void setSkuid(Long skuid) {
+        this.skuid = skuid;
     }
 
-    public Long getPrmid() {
-        return prmid;
+    public Long getSpecid() {
+        return specid;
     }
 
-    public void setPrmid(Long prmid) {
-        this.prmid = prmid;
+    public void setSpecid(Long specid) {
+        this.specid = specid;
     }
 
     public Integer getAn() {
