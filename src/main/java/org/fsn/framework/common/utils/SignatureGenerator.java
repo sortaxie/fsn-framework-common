@@ -30,4 +30,10 @@ public class SignatureGenerator {
         String baseString = URLEncoder.encode(sb.toString(), "UTF-8");
         return MD5Util.md5(baseString);
     }
+
+    public static Map<String, String> signParam(String token) throws UnsupportedEncodingException {
+        Map<String, String> reqParams = new HashMap<String, String>();
+        reqParams.put("token", URLEncoder.encode(token, "UTF-8"));
+        return reqParams;
+    }
 }
