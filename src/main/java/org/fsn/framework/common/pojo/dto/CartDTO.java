@@ -46,6 +46,22 @@ public class CartDTO {
         this.pid = pid;
     }
 
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Long getSkuid() {
         return skuid;
     }
@@ -60,6 +76,14 @@ public class CartDTO {
 
     public void setSpecid(Long specid) {
         this.specid = specid;
+    }
+
+    public String getSpecname() {
+        return specname;
+    }
+
+    public void setSpecname(String specname) {
+        this.specname = specname;
     }
 
     public Integer getAn() {
