@@ -3,6 +3,8 @@ package org.fsn.framework.common.pojo.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.math.BigDecimal;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CartDTO {
     @JsonIgnore
@@ -10,8 +12,11 @@ public class CartDTO {
     private String p;//项目名称
     private String uid; //用户id
     private Long pid; //产品id
+    private String pname;// 商品名称
+    private BigDecimal price; //价格
     private Long skuid; //货品id
     private Long specid; //规格id
+    private String specname; //规格名称
     private Integer an;  //活动编号
     private Long ct;// 创建时间
     private Integer count;//数量
