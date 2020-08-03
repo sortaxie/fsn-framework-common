@@ -28,6 +28,10 @@ public class MD5Util {
         return new String(str);
     }
 
+    public static final String md516(String s) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+         return md5(s).substring(8, 24);
+    }
+
     public static void main(String args[]) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         try {
            System.out.println(MD5Util.md5("123456"));
